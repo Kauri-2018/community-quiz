@@ -53,18 +53,18 @@ class App extends React.Component {
     return (
       <Router>
         <div className='app'>
-          <Route exact path='/' render={(
-            <Home changeName={this.changeName} />
-          )} />
-          <Route path='/question/play' render={(
-            <AskQuestion question={this.state.question}/>
-          )} />
-          <Route path='/question/play/result' render={(
-            <QuestionResult isCorrect={this.state.isCorrect} />
-          )} />
-          <Route path='/question/make' render={(
-            <MakeQuestion />
-          )} />
+          <Route exact path='/' render={() => {
+            return <Home changeName={this.changeName} />
+          }} />
+          <Route path='/question/play' render={() => {
+            return <AskQuestion question={this.state.question}/>
+          }} />
+          <Route path='/question/play/result' render={() => {
+            return <QuestionResult isCorrect={this.state.isCorrect} />
+          }} />
+          <Route path='/question/make' render={() => {
+            return <MakeQuestion />
+          }} />
         </div>
       </Router>
     )
