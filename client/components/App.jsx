@@ -44,6 +44,13 @@ class App extends React.Component {
       })
   }
 
+  setAnswer (answer) {
+    this.setState({
+        currentAnswer: answer
+    })
+
+  }
+
   submitAnswer (id, userAnswer) {
     apiSubmitAnswer(id, userAnswer)
       .then(wasCorrect => {
@@ -51,13 +58,6 @@ class App extends React.Component {
           isCorrect: wasCorrect
         })
       })
-  }
-
-  setAnswer (answer) {
-    this.setState({
-        currentAnswer: answer
-    })
-
   }
 
   render () {
