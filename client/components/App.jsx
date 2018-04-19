@@ -3,15 +3,16 @@ import {HashRouter as Router, Route} from 'react-router-dom'
 
 import {getQuestion as apiGetQuestion, submitAnswer as apiSubmitAnswer} from '../apiClient'
 import Home from './Home'
-import AskQuestion from './AskQuestion'
 import QuestionResult from './QuestionResult'
 import MakeQuestion from './MakeQuestion'
+import AnswerQuestion from './AnswerQuestion'
 
 class App extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
       name: '',
+      currentAnswer: false,
       streak: 0,
       question: {
         id: -1,
@@ -23,6 +24,9 @@ class App extends React.Component {
       error: null
     }
     this.changeName = this.changeName.bind(this)
+    this.getQuestion = this.getQuestion.bind(this)
+    this.submitAnswer = this.submitAnswer.bind(this)
+    this.setAnswer = this.setAnswer.bind(this)
   }
 
   changeName (e) {
@@ -38,6 +42,13 @@ class App extends React.Component {
           question
         })
       })
+  }
+
+  setAnswer (answer) {
+    this.setState({
+        currentAnswer: answer
+    })
+
   }
 
   submitAnswer (id, userAnswer) {
@@ -57,7 +68,11 @@ class App extends React.Component {
             return <Home changeName={this.changeName} />
           }} />
           <Route path='/question/play' render={() => {
-            return <AskQuestion question={this.state.question}/>
+            return <AnswerQuestion 
+              question={this.state.question} 
+              getQuestion={this.getQuestion}
+              setAnswer={this.setAnswer}
+              />
           }} />
           <Route path='/question/play/result' render={() => {
             return <QuestionResult isCorrect={this.state.isCorrect} />
