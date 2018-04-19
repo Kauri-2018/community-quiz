@@ -3,9 +3,9 @@ import {HashRouter as Router, Route} from 'react-router-dom'
 
 import {getQuestion as apiGetQuestion, submitAnswer as apiSubmitAnswer} from '../apiClient'
 import Home from './Home'
-import AskQuestion from './AskQuestion'
 import QuestionResult from './QuestionResult'
 import MakeQuestion from './MakeQuestion'
+import AnswerQuestion from './AnswerQuestion'
 
 class App extends React.Component {
   constructor (props) {
@@ -57,7 +57,7 @@ class App extends React.Component {
             return <Home changeName={this.changeName} />
           }} />
           <Route path='/question/play' render={() => {
-            return <AskQuestion question={this.state.question}/>
+            return <AnswerQuestion question={this.state.question}/>
           }} />
           <Route path='/question/play/result' render={() => {
             return <QuestionResult isCorrect={this.state.isCorrect} />
