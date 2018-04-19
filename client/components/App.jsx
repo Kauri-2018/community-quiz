@@ -1,32 +1,72 @@
 import React from 'react'
+import {HashRouter as Router, Route} from 'react-router-dom'
 
-import {getFruits} from '../apiClient'
+import {getQuestion as apiGetQuestion, submitAnswer as apiSubmitAnswer} from '../apiClient'
+import Home from './Home'
+import AskQuestion from './AskQuestion'
+import QuestionResult from './QuestionResult'
+import MakeQuestion from './MakeQuestion'
 
 class App extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      fruits: []
+      name: '',
+      streak: 0,
+      question: {
+        id: -1,
+        question: '',
+        contributor: '',
+        percentage: 0
+      },
+      isCorrect: false,
+      error: null
     }
+    this.changeName = this.changeName.bind(this)
   }
 
-  componentDidMount () {
-    getFruits()
-      .then(fruits => {
-        this.setState({fruits})
+  changeName (e) {
+    this.setState({
+      name: e.target.value
+    })
+  }
+
+  getQuestion () {
+    apiGetQuestion()
+      .then(question => {
+        this.setState({
+          question
+        })
+      })
+  }
+
+  submitAnswer (id, userAnswer) {
+    apiSubmitAnswer(id, userAnswer)
+      .then(wasCorrect => {
+        this.setState({
+          isCorrect: wasCorrect
+        })
       })
   }
 
   render () {
     return (
-      <div className='app'>
-        <h1>Fullstack Boilerplate</h1>
-        <ul>
-          {this.state.fruits.map(fruit => (
-            <li key={fruit}>{fruit}</li>
-          ))}
-        </ul>
-      </div>
+      <Router>
+        <div className='app'>
+          <Route exact path='/' render={(
+            <Home changeName={this.changeName} />
+          )} />
+          <Route path='/question/play' render={(
+            <AskQuestion question={this.state.question}/>
+          )} />
+          <Route path='/question/play/result' render={(
+            <QuestionResult isCorrect={this.state.isCorrect} />
+          )} />
+          <Route path='/question/make' render={(
+            <MakeQuestion />
+          )} />
+        </div>
+      </Router>
     )
   }
 }
