@@ -3,11 +3,11 @@ import {Link} from 'react-router-dom'
 
 class QuestionResult extends React.Component {
   componentDidMount () {
-    props.submitAnswer()
+    this.props.submitAnswer()
   }
 
   render () {
-    const isCorrect = props.isCorrect
+    const isCorrect = this.props.isCorrect
     return (
       <div className="question-result-wrapper">
         <h3>Result:</h3>
@@ -33,6 +33,5 @@ class QuestionResult extends React.Component {
     )
   }
 }
-const QuestionResult = props => 
 
 export default QuestionResult
