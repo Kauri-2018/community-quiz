@@ -78,9 +78,13 @@ class App extends React.Component {
               submitAnswer={this.submitAnswer}
               isCorrect={this.state.isCorrect} />
           }} />
+<<<<<<< HEAD
+          <Route path='/question/make' component={MakeQuestion} />
+=======
           <Route path='/question/make' render={() => {
             return <MakeQuestion />
           }} />
+>>>>>>> development
         </div>
       </Router>
     )
