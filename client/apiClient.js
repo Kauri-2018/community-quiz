@@ -3,7 +3,7 @@ import request from 'superagent'
 const rootUrl = '/api/v1/questions/'
 
 export function getQuestion () {
-  return request.get(rootUrl)
+  return request.get(rootUrl + 'random')
     .then(res => {
       return res.body
     })

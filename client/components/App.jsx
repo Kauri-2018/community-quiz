@@ -68,7 +68,7 @@ class App extends React.Component {
           }} />
           <Route path='/question/play' render={() => {
             return <AnswerQuestion
-              question={this.state.question}
+              question={this.state.question.question}
               getQuestion={this.getQuestion}
               setAnswer={this.setAnswer}
             />

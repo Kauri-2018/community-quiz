@@ -3,14 +3,6 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 
 class AnswerQuestion extends React.Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-      question: '',
-      isCorrect: false
-    }
-  }
-
   componentDidMount () {
     this.props.getQuestion()
   }
@@ -19,7 +11,7 @@ class AnswerQuestion extends React.Component {
     return (
       <div className="answer-question-wrapper">
         <h1>Question</h1>
-        <p>{this.state.question}</p>
+        <p>{this.props.question}</p>
         <button className="true-btn"
           onClick={this.props.setAnswer}
         >True</button>
