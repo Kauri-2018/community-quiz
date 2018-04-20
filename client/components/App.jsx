@@ -78,9 +78,7 @@ class App extends React.Component {
               submitAnswer={this.submitAnswer}
               isCorrect={this.state.isCorrect} />
           }} />
-          <Route path='/question/make' render={() => {
-            return <MakeQuestion />
-          }} />
+          <Route path='/question/make' component={MakeQuestion} />
         </div>
       </Router>
     )
