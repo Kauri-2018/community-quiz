@@ -1,7 +1,10 @@
 const express = require('express')
 
+<<<<<<< HEAD
 const db = require('../db/db.js')
 
+=======
+>>>>>>> 2b12c3d71286517e6d396f9fbf36c79afd015465
 const router = express.Router()
 
 router.get('/', (req, res) => {
