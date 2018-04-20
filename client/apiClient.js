@@ -1,10 +1,24 @@
-// import request from 'superagent'
+import request from 'superagent'
 
-// const rootUrl = '/api/v1'
+const rootUrl = '/api/v1/questions/'
 
-// export function getFruits () {
-//   return request.get(rootUrl + '/fruits')
-//     .then(res => {
-//       return res.body.fruits
-//     })
-// }
+export function getQuestion () {
+  return request.get(rootUrl)
+    .then(res => {
+      return res.body
+    })
+}
+
+export function addQuestion (question) {
+  return request.get(`${rootUrl}/make`)
+    .then(res => {
+      return res.body
+    })
+}
+
+export function submitAnswer (id, userAnswer) {
+  return request.get(`${rootUrl}/${id}?answer=${userAnswer}`)
+    .then(res => {
+      return res.body === 'true'
+    })
+}
