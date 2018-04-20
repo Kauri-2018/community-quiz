@@ -1,4 +1,5 @@
 const express = require('express')
+
 const router = express.Router()
 
 const db = require('../db/db')
@@ -26,14 +27,19 @@ router.get('/oldest', (req, res) => {
 })
 
 router.put('/:id/update', (req, res) => {
-  db.updateQuestion()
+  const id = Number(req.params.id)
+  const userAnswer = Number(req.query.answer)
+  db.updateQuestion(id, userAnswer)
     .then(isCorrect => {
       res.send(isCorrect)
     })
 })
 
 router.post('/add', (req, res) => {
-  db.addQuestion()
+  const name = 'Cam'
+  const question = 'What is my name'
+  const answer = true
+  db.addQuestion(question, answer, name)
     .then(question => {
       res.json({question})
     })
