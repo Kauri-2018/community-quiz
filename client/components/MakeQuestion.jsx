@@ -1,5 +1,6 @@
 import React from 'react'
 
+<<<<<<< HEAD
 import {Link} from 'react-router-dom'
 
 class MakeQuestion extends React.Component {
@@ -35,6 +36,14 @@ class MakeQuestion extends React.Component {
     </div>
     )
   }
+=======
+const MakeQuestion = () => {
+  return (
+    <div className="make-question-wrapper">
+      <h1>Make Question</h1>
+    </div>
+  )
+>>>>>>> development
 }
 
 export default MakeQuestion
