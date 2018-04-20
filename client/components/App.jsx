@@ -46,9 +46,8 @@ class App extends React.Component {
 
   setAnswer (answer) {
     this.setState({
-        currentAnswer: answer
+      currentAnswer: answer
     })
-
   }
 
   submitAnswer (id, userAnswer) {
@@ -68,14 +67,16 @@ class App extends React.Component {
             return <Home changeName={this.changeName} />
           }} />
           <Route path='/question/play' render={() => {
-            return <AnswerQuestion 
-              question={this.state.question} 
+            return <AnswerQuestion
+              question={this.state.question}
               getQuestion={this.getQuestion}
               setAnswer={this.setAnswer}
-              />
+            />
           }} />
           <Route path='/question/play/result' render={() => {
-            return <QuestionResult isCorrect={this.state.isCorrect} />
+            return <QuestionResult
+              submitAnswer={this.submitAnswer}
+              isCorrect={this.state.isCorrect} />
           }} />
           <Route path='/question/make' render={() => {
             return <MakeQuestion />
