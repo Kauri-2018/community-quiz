@@ -1,10 +1,12 @@
+const _ = require('lodash')
+
 const environment = process.env.NODE_ENV || 'development'
 const config = require('./knexfile')[environment]
 const connection = require('knex')(config)
 
 module.exports = {
   getQuestions,
-  getQuestion,
+  getRandomQuestion,
   updateQuestion,
   addQuestion
 }
@@ -20,6 +22,14 @@ function getQuestions (conn = connection) {
 
 function getQuestion (id, conn = connection) {
   return conn('questions').where('id', id).first()
+}
+
+function getRandomQuestion (conn = connection) {
+  return conn('questions').select()
+    .then(questions => {
+      const randomQuestion = _.shuffle(questions)[0]
+      return randomQuestion
+    })
 }
 
 function addQuestion (question, answer, name, conn = connection) {
