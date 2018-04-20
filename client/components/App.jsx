@@ -16,7 +16,7 @@ class App extends React.Component {
       streak: 0,
       question: {
         id: -1,
-        question: '',
+        question: 'Waiting for Question',
         contributor: '',
         percentage: 0
       },
@@ -26,7 +26,8 @@ class App extends React.Component {
     this.changeName = this.changeName.bind(this)
     this.getQuestion = this.getQuestion.bind(this)
     this.submitAnswer = this.submitAnswer.bind(this)
-    this.setAnswer = this.setAnswer.bind(this)
+    this.setAnswerFalse = this.setAnswerFalse.bind(this)
+    this.setAnswerTrue = this.setAnswerTrue.bind(this)
   }
 
   changeName (e) {
@@ -39,19 +40,25 @@ class App extends React.Component {
     apiGetQuestion()
       .then(question => {
         this.setState({
-          question
+          question: question.question
         })
       })
   }
 
-  setAnswer (answer) {
+  setAnswerTrue () {
     this.setState({
-      currentAnswer: answer
+      currentAnswer: true
     })
   }
 
-  submitAnswer (id, userAnswer) {
-    apiSubmitAnswer(id, userAnswer)
+  setAnswerFalse () {
+    this.setState({
+      currentAnswer: false
+    })
+  }
+
+  submitAnswer () {
+    apiSubmitAnswer(this.state.question.id, this.state.currentAnswer)
       .then(wasCorrect => {
         this.setState({
           isCorrect: wasCorrect
@@ -70,7 +77,8 @@ class App extends React.Component {
             return <AnswerQuestion
               question={this.state.question.question}
               getQuestion={this.getQuestion}
-              setAnswer={this.setAnswer}
+              setAnswerTrue={this.setAnswerTrue}
+              setAnswerFalse={this.setAnswerFalse}
             />
           }} />
           <Route path='/question/play/result' render={() => {

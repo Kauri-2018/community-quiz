@@ -17,7 +17,8 @@ export function addQuestion (question) {
 }
 
 export function submitAnswer (id, userAnswer) {
-  return request.get(`${rootUrl}/${id}?answer=${userAnswer}`)
+  const answ = userAnswer.toString()
+  return request.get(`${rootUrl}/${id}?answer=${answ}`)
     .then(res => {
       return res.body === 'true'
     })
