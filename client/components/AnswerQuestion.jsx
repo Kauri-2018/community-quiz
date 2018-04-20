@@ -13,11 +13,6 @@ class AnswerQuestion extends React.Component {
 
   componentDidMount () {
     this.props.getQuestion()
-      .then(question => {
-        this.setState({
-          question
-        })
-      })
   }
 
   render () {

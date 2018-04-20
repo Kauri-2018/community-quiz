@@ -1,7 +1,7 @@
 const _ = require('lodash')
 
 const environment = process.env.NODE_ENV || 'development'
-const config = require('./knexfile')[environment]
+const config = require('../../knexfile')[environment]
 const connection = require('knex')(config)
 
 module.exports = {
@@ -47,17 +47,20 @@ function addQuestion (question, answer, name, conn = connection) {
 function updateQuestion (id, userAnswer, conn = connection) {
   return getQuestion(id)
     .then(question => {
-      conn('questions')
+      return conn('questions')
         .update({
-          'answer': userAnswer,
           'times_answered': question.times_answered + 1,
-          'times_correct': userAnswer === question.answer
+          'times_correct': userAnswer === Number(question.answer)
             ? question.times_correct + 1
-            : question.times_correct
+            : question.times_correct,
+          'last_answered': 'Date'
         })
-      return question
+        .where('questions.id', '=', id)
     })
-    .then((question) => {
-      return userAnswer === question.answer
+    .then(rowsUpdated => {
+      return getQuestion(id)
+        .then(question => {
+          return userAnswer === Number(question.answer)
+        })
     })
 }
