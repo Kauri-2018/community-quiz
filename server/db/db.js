@@ -28,7 +28,13 @@ function getRandomQuestion (conn = connection) {
   return conn('questions').select()
     .then(questions => {
       const randomQuestion = _.shuffle(questions)[0]
-      return randomQuestion
+      const sendQuestion = {
+        question: randomQuestion.question,
+        contributor: randomQuestion.contributor,
+        id: randomQuestion.id,
+        percentage: randomQuestion.times_correct / randomQuestion.times_answered * 100
+      }
+      return sendQuestion
     })
 }
 
